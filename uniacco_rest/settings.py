@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'django.contrib.sites',
 ]
-SITE_ID = 1
+SITE_ID = 2
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -83,13 +84,31 @@ WSGI_APPLICATION = 'uniacco_rest.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
+    'default': {
+
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+
+        'NAME': 'ddf3e20vhab8dg',
+
+        'USER': 'qglpxrzzqqtkdd',
+
+        'PASSWORD': '5135b84042b5896bce129a3e4433cff82dde06021f87e9b24e92fac81374aae3',
+
+        'HOST': 'ec2-54-86-189-179.compute-1.amazonaws.com',
+
+        'PORT': 5432,
+
+    }
+
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
