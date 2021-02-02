@@ -1,23 +1,10 @@
-from django.shortcuts import render
-
-# Create your views here.
-from django.shortcuts import render
 from .serializers import UserSerializer, AuthTokenSerializer
-from rest_framework.decorators import api_view
-from django.contrib.auth import get_user_model
 from rest_framework.response import Response
 from rest_framework import exceptions, generics
-from rest_framework.permissions import AllowAny
-from rest_framework.decorators import api_view, permission_classes
-from django.views.decorators.csrf import ensure_csrf_cookie
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.settings import api_settings
-from ipaddress import ip_address, ip_network
-# from ipware import get_client_ip
-from django.http import HttpResponse
 from rest_framework.authtoken.models import Token
 import requests
-from django.views.decorators.csrf import csrf_exempt
 import json
 from .models import UserLoginHistory
 

@@ -32,7 +32,7 @@ class User(AbstractBaseUser,PermissionsMixin):
     USERNAME_FIELD = 'email'
 
 class UserLoginHistory(models.Model):
-    """Model for user ip address history"""
+    """Model for the user ip addresses history"""
     ip = models.GenericIPAddressField()
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE,)

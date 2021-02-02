@@ -6,6 +6,7 @@ from django.http import HttpResponse
 admin.site.register(User)
 # admin.site.register(UserLoginHistory)
 class ExportCsvMixin:
+    """To export the model UserLoginHistory as a CSV file"""
     def export_as_csv(self, request, queryset):
 
         meta = self.model._meta
@@ -25,5 +26,6 @@ class ExportCsvMixin:
 
 @admin.register(UserLoginHistory)
 class CustomUserHistory(admin.ModelAdmin,ExportCsvMixin):
+    """Overriding the default ModelAdmin Model"""
     list_display = ['user','ip']
     actions = ['export_as_csv']
