@@ -1,0 +1,1 @@
+web: gunicorn uniacco_rest.wsgi
