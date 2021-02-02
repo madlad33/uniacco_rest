@@ -84,32 +84,16 @@ WSGI_APPLICATION = 'uniacco_rest.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 DATABASES = {
-
     'default': {
-
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-
-        'NAME': 'ddf3e20vhab8dg',
-
-        'USER': 'qglpxrzzqqtkdd',
-
-        'PASSWORD': '5135b84042b5896bce129a3e4433cff82dde06021f87e9b24e92fac81374aae3',
-
-        'HOST': 'ec2-54-86-189-179.compute-1.amazonaws.com',
-
-        'PORT': 5432,
-
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
-
 }
 
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
