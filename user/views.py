@@ -66,21 +66,28 @@ class CreateTokenView(ObtainAuthToken):
         # current ip
 
 
-class CreateUserDetailView(generics.CreateAPIView):
+class CreateUserDetailView(generics.ListCreateAPIView):
     serializer_class = UserDetailSerializer
     authentication_classes = TokenAuthentication,
     permission_classes = IsAuthenticated,
 
+    def get_queryset(self):
+        return UserDetailAnother.objects.filter(user=self.request.user)
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
+    def get(self, request, *args, **kwargs):
+        return self.list(request,*args,**kwargs)
 
-class UserDetailView(generics.RetrieveAPIView):
+class UserDetailView(generics.ListAPIView):
     serializer_class = UserDetailSerializer
     lookup_field = 'pk'
     authentication_classes = (TokenAuthentication,)
     permission_classes = IsAuthenticated,
 
-    def get_object(self):
-        # pk = self.kwargs['pk']
-        return get_object_or_404(UserDetailAnother, user=self.request.user)
+    # def get_object(self):
+    #     # pk = self.kwargs['pk']
+    #
+    #     return UserDetailAnother.objects.filter(user=self.request.user)
+    def get_queryset(self):
+        return UserDetailAnother.objects.filter(user=self.request.user)
