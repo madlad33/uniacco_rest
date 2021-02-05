@@ -1,4 +1,6 @@
-from .serializers import UserSerializer, AuthTokenSerializer
+from rest_framework.generics import get_object_or_404
+from .models import UserDetailAnother
+from .serializers import UserSerializer, AuthTokenSerializer, UserDetailSerializer
 from rest_framework.response import Response
 from rest_framework import exceptions, generics
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -7,6 +9,10 @@ from rest_framework.authtoken.models import Token
 import requests
 import json
 from .models import UserLoginHistory
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth import get_user_model
+from django.shortcuts import get_object_or_404
 
 
 # Create your views here.
@@ -58,3 +64,23 @@ class CreateTokenView(ObtainAuthToken):
         UserLoginHistory.objects.create(ip=ip,
                                         user=user)  # Create entry in the user login history model to save the
         # current ip
+
+
+class CreateUserDetailView(generics.CreateAPIView):
+    serializer_class = UserDetailSerializer
+    authentication_classes = TokenAuthentication,
+    permission_classes = IsAuthenticated,
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+
+class UserDetailView(generics.RetrieveAPIView):
+    serializer_class = UserDetailSerializer
+    lookup_field = 'pk'
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = IsAuthenticated,
+
+    def get_object(self):
+        # pk = self.kwargs['pk']
+        return get_object_or_404(UserDetailAnother, user=self.request.user)

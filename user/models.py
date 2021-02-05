@@ -38,3 +38,21 @@ class UserLoginHistory(models.Model):
                              on_delete=models.CASCADE,)
     def __str__(self):
         return str(self.user)
+
+
+class UserDetails(models.Model):
+    university = models.CharField(max_length=255)
+    year_of_study = models.DateField()
+    course = models.CharField(max_length=255)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    def __str__(self):
+        return self.university
+
+class UserDetailAnother(models.Model):
+    university = models.CharField(max_length=255)
+    year_of_study = models.DateField()
+    course = models.CharField(max_length=255)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.university

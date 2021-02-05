@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import UserLoginHistory,User
+from .models import UserLoginHistory,User,UserDetails
 import csv
 from django.http import HttpResponse
 # Register your models here.
@@ -29,3 +29,5 @@ class CustomUserHistory(admin.ModelAdmin,ExportCsvMixin):
     """Overriding the default ModelAdmin Model"""
     list_display = ['user','ip']
     actions = ['export_as_csv']
+
+admin.site.register(UserDetails)

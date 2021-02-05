@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model, authenticate
 from rest_framework import serializers
-
+from .models import UserDetails,UserDetailAnother
 class AuthTokenSerializer(serializers.Serializer):
     """Serialzier for user authentication object"""
     email = serializers.CharField()
@@ -53,5 +53,10 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 
+class UserDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserDetailAnother
+        fields = ['university','year_of_study','course']
+        read_only_fields = ['user']
 
 
